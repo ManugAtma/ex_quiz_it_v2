@@ -1,0 +1,80 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.clickable {
+  cursor: pointer;
+  transition: background-color .2s;
+}
+
+.clickable:hover {
+  background-color: var(--bs-info) !important;
+}
+
+.correct-answer {
+  background-color: var(--bs-success);
+}
+
+.incorrect-answer {
+  background-color: var(--bs-danger);
+}
+
+.progress-bar {
+  transition: none !important;
+}
+
+.fa-icon-no-margin {
+  margin-left: -0.15em;
+}
+
+
+#next-section {
+  height: 3em;
+  box-sizing: border-box;
+}
+
+#next-btn {
+  max-height: 1.5em;
+}
+
+#saved-alert {
+  width: 10em;
+}
+
+@font-face {
+  font-family: 'Borsok';
+  src: url('assets/Borsok.woff2') format('woff2'),
+    url('assets/Borsok.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.borsok-font {
+  font-family: Borsok, sans-serif;
+}
+
+.text-white {
+  color: white;
+}
+
+.navbar-toggler {
+  border-color: #f8f9fa !important;
+}
+
+.answer-top-bottom {
+  min-height: 2.5em;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+#login-form {
+  max-width: 400px;
+}
