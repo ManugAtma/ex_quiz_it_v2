@@ -1,5 +1,5 @@
 import { createContext, useEffect, useRef } from "react";
-import { BrowserRouter, Routes, Route, RouterProvider, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, RouterProvider, useNavigate, Outlet, useLoaderData } from "react-router-dom";
 
 import { API_CATEGORIES_URL, API_TOKEN_URL } from "./config";
 
@@ -46,28 +46,40 @@ function App() {
     });
 
 
+    const payload = useLoaderData();
+    if (payload) {
+        const userinfo = payload.userinfo;
+        auth.current.userId = userinfo.id;
+        auth.current.username = userinfo.username;
+        auth.current.authenticated = true;
+        settings.current = payload.savedSettings
+    }
+
+    
+
+
     // fetch /me to restore session if JWT still valid
     useEffect(() => {
-        const restore = async () => {
+        // const restore = async () => {
 
-            const res = await fetch("http://localhost:3000/me", { credentials: "include" });
+        //     const res = await fetch("http://localhost:3000/me", { credentials: "include" });
 
-            if (!res.ok) {
-                console.log("session could not be restored");
-                return;
-            }
+        //     if (!res.ok) {
+        //         console.log("session could not be restored");
+        //         return;
+        //     }
 
-            // restore session
-            const payload = await res.json();
-            const userinfo = payload.userinfo;
-            auth.current.userId = userinfo.id;
-            auth.current.username = userinfo.username;
-            auth.current.authenticated = true;
+        //     // restore session
+        //     const payload = await res.json();
+        //     const userinfo = payload.userinfo;
+        //     auth.current.userId = userinfo.id;
+        //     auth.current.username = userinfo.username;
+        //     auth.current.authenticated = true;
 
-            settings.current = payload.savedSettings
+        //     settings.current = payload.savedSettings
 
-        }
-        restore();
+        // }
+        // restore();
     }, []);
 
     //const [categories, categoriesError] = useFetch(API_CATEGORIES_URL);
@@ -79,7 +91,8 @@ function App() {
     return (
         <AuthContext.Provider value={auth.current}>
             <SettingsContext.Provider value={[settings, token, tokenError, categories, categoriesError]}>
-                <RouterProvider router={router} />
+                {/* <RouterProvider router={router} /> */}
+                <Outlet />
             </SettingsContext.Provider>
         </AuthContext.Provider>
     );

@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
 
 import login from "./login";
@@ -13,6 +13,10 @@ export default function Login() {
 
     const auth = useContext(AuthContext);
     const navigate = useNavigate();
+
+    if (auth.authenticated){
+         return <Navigate to={`/user/${auth.userId}`} replace />;
+    }
 
     return (
         <Container id="login-form">

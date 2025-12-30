@@ -1,6 +1,7 @@
 
 TODO 
 
+- check Spinner of hydrateFallbackElement of App in router
 - check unknown props in App userinfo object (useEffect)
 - verify jwt in middleware X
 - loading animation for settings until categories fetched (Welcome)
