@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import jwt from 'jsonwebtoken';
+import jwt, { JsonWebTokenError, NotBeforeError, TokenExpiredError } from 'jsonwebtoken';
 
 
 interface Settings {
@@ -8,7 +8,7 @@ interface Settings {
     difficulty: string;
 }
 
-
+// TODO replace with DB calls in functions
 const savedSettings = {
     amount: 5,
     category: "",
@@ -18,39 +18,35 @@ const savedSettings = {
 export function updateSettings(req: Request<{}, {}, Settings>, res: Response) {
 
     try {
-        const token = req.cookies.access_token;
-        _verifyToken(token);
 
         const settings = req.body;
         savedSettings.amount = settings.amount;
         savedSettings.category = settings.category;
         savedSettings.difficulty = settings.difficulty;
 
-        console.log(`updateSettings amount: ${settings.amount}`);
+        res.status(200);
+        res.json(`settings updated: ${settings}`);
+
+        console.log(`updateSettings, amount: ${settings.amount}`);
 
     } catch (err) {
-        res.status(401);
-        res.json(`Unauthorized ${err}`);
+
+        res.status(500);
+        res.json(`Internal server error ${err}`);
     }
 }
 
 export function getSettings(req: Request, res: Response) {
 
     try {
-        const token = req.cookies.access_token;
-        _verifyToken(token);
-
+        res.status(200);
         res.json(savedSettings);
         console.log("getSettings");
 
     } catch (err) {
-        res.status(401);
-        res.json(`Unauthorized ${err}`);
+        res.status(500);
+        res.json(`Internal server error ${err}`);
     }
 }
 
 
-function _verifyToken(token: any) {
-    const secret = process.env.JWT_SECRET!;
-    jwt.verify(token, secret);
-}

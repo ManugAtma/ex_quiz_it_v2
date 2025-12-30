@@ -1,5 +1,5 @@
-import { createContext, useRef } from "react";
-import { BrowserRouter, Routes, Route, RouterProvider } from "react-router-dom";
+import { createContext, useEffect, useRef } from "react";
+import { BrowserRouter, Routes, Route, RouterProvider, useNavigate } from "react-router-dom";
 
 import { API_CATEGORIES_URL, API_TOKEN_URL } from "./config";
 
@@ -9,6 +9,9 @@ import Settings from "./pages/settings/Settings";
 import About from './pages/about/About';
 import useFetch from "./util/useFetch";
 import { router } from './router/router';
+
+// TODO remove this import
+import { categories, token } from "./testObjects";
 
 
 const SettingsContext = createContext();
@@ -42,11 +45,36 @@ function App() {
         userId: "",
     });
 
-    // check api/me to restore auth status, settings, user name (welcome screen) and api token
 
-    const [categories, categoriesError] = useFetch(API_CATEGORIES_URL);
+    // fetch /me to restore session if JWT still valid
+    useEffect(() => {
+        const restore = async () => {
 
-    const [token, tokenError] = useFetch(API_TOKEN_URL);
+            const res = await fetch("http://localhost:3000/me", { credentials: "include" });
+
+            if (!res.ok) {
+                console.log("session could not be restored");
+                return;
+            }
+
+            // restore session
+            const payload = await res.json();
+            const userinfo = payload.userinfo;
+            auth.current.userId = userinfo.id;
+            auth.current.username = userinfo.username;
+            auth.current.authenticated = true;
+
+            settings.current = payload.savedSettings
+
+        }
+        restore();
+    }, []);
+
+    //const [categories, categoriesError] = useFetch(API_CATEGORIES_URL);
+    const categoriesError = null;
+
+    //const [token, tokenError] = useFetch(API_TOKEN_URL);
+    const tokenError = null;
 
     return (
         <AuthContext.Provider value={auth.current}>

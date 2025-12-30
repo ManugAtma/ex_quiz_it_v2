@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { Form, Container, Button } from 'react-bootstrap';
 
-import { SettingsContext } from "@/App";
+import { SettingsContext, AuthContext } from "@/App";
 import useFetch from '@/util/useFetch';
 import LoadingHandler from '@/components/LoadingHandler';
 
@@ -26,17 +26,37 @@ function Settings() {
     const [amount, setAmount] = useState(settings.current.amount);
     const [category, setCategory] = useState(settings.current.category);
     const [difficulty, setDifficulty] = useState(settings.current.difficulty);
-    const [,,,categories, categoriesError] = useContext(SettingsContext)
+    const [, , , categories, categoriesError] = useContext(SettingsContext)
     const [showAlert, setShowAlert] = useState(false);
+    const auth = useContext(AuthContext);
 
-    function saveSettings(e) {
+    async function saveSettings(e) {
         e.preventDefault();
+
+        // save locally
         settings.current = {
             amount,
             category,
             difficulty
         };
-        setShowAlert(true);
+
+        console.log(settings.current.amount);
+
+        // save in DB
+        const res = await fetch(`http://localhost:3000/user/${auth.userId}/settings`, {
+            method: "PUT",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(settings.current)
+        });
+
+        if (res.ok) {
+            setShowAlert(true);
+        } else {
+            // TODO 
+        }
     }
 
     return (

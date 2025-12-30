@@ -1,0 +1,10 @@
+
+TODO 
+
+- check unknown props in App userinfo object (useEffect)
+- verify jwt in middleware X
+- loading animation for settings until categories fetched (Welcome)
+- DB
+- Header
+- logout
+- remove testObjects and uncomment in App

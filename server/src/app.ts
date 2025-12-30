@@ -14,7 +14,7 @@ app.use(cors({
 }));
 app.use(cookieParser());
 
-app.use("/", authRouter)
+app.use("/", authRouter);
 app.use("/user", userRouter);
 
 export default app;
