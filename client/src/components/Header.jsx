@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -6,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import { GITHUB_URL } from '@/config';
+
+import { AuthContext } from './Layout';
 
 
 /**
@@ -23,6 +26,9 @@ import { GITHUB_URL } from '@/config';
  * - A toggler for small screens (i.e. smaller than bootstrap's lg). 
  */
 function Header() {
+
+    const auth = useContext(AuthContext)
+
     return (
         <Navbar expand="lg" className="bg-info navbar-dark borsok-font">
             <Container fluid>
@@ -55,7 +61,7 @@ function Header() {
                 {/* Collapsed nav for small, inline nav for large */}
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link className="text-light" as={NavLink} to="/">Play</Nav.Link>
+                        <Nav.Link className="text-light" as={NavLink} to="/user/:id/play">Play</Nav.Link>
                         <Nav.Link className="text-light" as={NavLink} to="/user/:id/settings">Settings</Nav.Link>
                         <Nav.Link className="text-light" as={NavLink} to="about">About</Nav.Link>
                     </Nav>

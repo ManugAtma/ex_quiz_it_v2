@@ -1,7 +1,9 @@
 import { useContext, useEffect } from "react";
-import { AuthContext } from "/src/App";
-import { SettingsContext } from "../../App";
+
+import { AuthContext } from "@/components/Layout";
 import useFetch from "@/util/useFetch";
+
+import { SettingsContext } from "../../App";
 
 
 export default function Welcome() {

@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
+
 import Unauthorized from "../pages/login/Unauthorized";
-import { AuthContext } from "/src/App";
+import { AuthContext } from "@/components/Layout";
 import { useContext } from "react";
 
 export default function ProtectedLayout() {

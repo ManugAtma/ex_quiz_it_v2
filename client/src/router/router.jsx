@@ -2,7 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
 
 import { App } from '@/App';
-import Layout from '@/components/Layout';
+import { Layout } from '@/components/Layout';
 import Login from '@/pages/login/Login';
 import ProtectedLayout from '@/components/ProtectedLayout';
 import Welcome from '@/pages/welcome/Welcome';

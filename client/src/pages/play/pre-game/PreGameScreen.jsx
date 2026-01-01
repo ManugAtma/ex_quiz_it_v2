@@ -17,14 +17,14 @@ import { faFaceGrinHearts } from '@fortawesome/free-solid-svg-icons';
 function PreGameScreen({ setPlaying }) {
     return (
         <>
-            <Container className='d-flex justify-content-center align-items-center mt-2 mb-2'>
+            {/* <Container className='d-flex justify-content-center align-items-center mt-2 mb-2'>
                 <h2 className='borsok-font'>Welcome to
                     <span className="text-warning"> Ex</span>
                     <span className="text-success">Quiz</span>
                     <span className="text-danger">It </span>
                     </h2>
                     <FontAwesomeIcon icon={faFaceGrinHearts} size="2x" className={`text-success fa-fw mb-3`} style={{ marginLeft: "0.1em" }}/>
-            </Container>
+            </Container> */}
 
 
             <Card className="border border-3 border-primary">

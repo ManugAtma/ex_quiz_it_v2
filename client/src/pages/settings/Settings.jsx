@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
 import { Form, Container, Button } from 'react-bootstrap';
 
-import { SettingsContext, AuthContext } from "@/App";
-import useFetch from '@/util/useFetch';
+import { SettingsContext } from "@/App";
+import { AuthContext } from "@/components/Layout";
 import LoadingHandler from '@/components/LoadingHandler';
 
 import Categories from './Categories';
@@ -39,8 +39,6 @@ function Settings() {
             category,
             difficulty
         };
-
-        console.log(settings.current.amount);
 
         // save in DB
         const res = await fetch(`http://localhost:3000/user/${auth.userId}/settings`, {

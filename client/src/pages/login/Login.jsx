@@ -2,11 +2,13 @@ import { useContext, useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
 
+import { AuthContext } from "@/components/Layout";
+
 import login from "./login";
-import { AuthContext } from "/src/App";
+
+
 
 export default function Login() {
-
 
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
