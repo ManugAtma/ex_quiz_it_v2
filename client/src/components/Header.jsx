@@ -44,6 +44,7 @@ function Header() {
 
                 {/* right: Small screen only (icon + toggler) */}
                 <div className="d-flex align-items-center ms-auto m d-lg-none">
+                    {auth.authenticated ? <p>logout</p> : null}
                     {/* gitHub icon (left of toggler) */}
                     <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="me-3">
                         <FontAwesomeIcon
@@ -61,13 +62,24 @@ function Header() {
                 {/* Collapsed nav for small, inline nav for large */}
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link className="text-light" as={NavLink} to="/user/:id/play">Play</Nav.Link>
-                        <Nav.Link className="text-light" as={NavLink} to="/user/:id/settings">Settings</Nav.Link>
+
+                        {auth.authenticated
+                            ? <Nav.Link className="text-light" as={NavLink} to="/user/:id/play">Play</Nav.Link>
+                            : null
+                        }
+
+                        {auth.authenticated
+                            ? <Nav.Link className="text-light" as={NavLink} to="/user/:id/settings">Settings</Nav.Link>
+                            : null
+                        }
+
                         <Nav.Link className="text-light" as={NavLink} to="about">About</Nav.Link>
+
                     </Nav>
 
                     {/* gitHub icon for large screens only */}
                     <div className="d-none d-lg-block ms-auto me-2">
+                        {auth.authenticated ? <p>logout</p> : null}
                         <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
                             <FontAwesomeIcon
                                 icon={faGithub}

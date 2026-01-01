@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { createContext, useRef } from "react";
+import { createContext, useRef, useState } from "react";
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -22,11 +22,24 @@ const AuthContext = createContext();
  */
 function Layout() {
 
+  const [authenticated, setAuthenticated] = useState(false);
+
+
   const auth = useRef({
-    authenticated: false,
+    // authenticated: authenticated,
+    // setAuthenticated: setAuthenticated,
     username: "",
     userId: "",
   });
+
+  auth.current.authenticated = authenticated
+  auth.current.setAuthenticated = setAuthenticated
+
+  // const auth = useRef({
+  //   authenticated: false,
+  //   username: "",
+  //   userId: "",
+  // });
 
   return (
     <AuthContext.Provider value={auth.current}>

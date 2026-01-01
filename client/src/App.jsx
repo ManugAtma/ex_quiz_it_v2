@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef } from "react";
+import { createContext, useContext, useEffect, useRef } from "react";
 import { Outlet, useLoaderData } from "react-router-dom";
 
 import { AuthContext } from "./components/Layout";
@@ -34,13 +34,26 @@ function App() {
     const auth = useContext(AuthContext)
 
     const payload = useLoaderData();
-    if (payload) {
+
+    // if (payload) {
+    //     const userinfo = payload.userinfo;
+    //     auth.userId = userinfo.id;
+    //     auth.username = userinfo.username;
+    //     //auth.authenticated = true;
+    //     auth.setAuthenticated(true);
+    //     settings.current = payload.savedSettings
+    // }
+    
+    useEffect(()=>{
+        if (payload) {
         const userinfo = payload.userinfo;
         auth.userId = userinfo.id;
         auth.username = userinfo.username;
-        auth.authenticated = true;
+        //auth.authenticated = true;
+        auth.setAuthenticated(true);
         settings.current = payload.savedSettings
     }
+    },[]);
 
 
     //const [categories, categoriesError] = useFetch(API_CATEGORIES_URL);

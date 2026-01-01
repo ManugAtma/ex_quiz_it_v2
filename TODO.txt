@@ -1,6 +1,8 @@
 
 TODO 
 
+- try making auth.authenticated reactive (change login fun and restore fun in router)
+- handle session timeout
 - check Spinner of hydrateFallbackElement of App in router
 - check unknown props in App userinfo object (useEffect)
 - verify jwt in middleware X

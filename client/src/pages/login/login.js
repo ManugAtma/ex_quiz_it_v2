@@ -20,7 +20,8 @@ export default async function login(auth, navigate) {
             // set global state
             auth.username = json.username;
             auth.userId = json.id;
-            auth.authenticated = true;
+            //auth.authenticated = true;
+            auth.setAuthenticated(true);
 
             // navigate to welcome screen
             navigate(`/user/${json.id}`);
