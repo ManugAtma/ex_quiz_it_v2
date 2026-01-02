@@ -9,7 +9,7 @@ export default async function login(auth, navigate) {
             headers: { "Content-Type": "application/json" },
             
             // TODO replace with values from form 
-            body: JSON.stringify({ username: "g", password: "g" }),
+            body: JSON.stringify({ username: "John", password: "doe" }),
             credentials: "include"
         });
 
@@ -20,14 +20,13 @@ export default async function login(auth, navigate) {
             // set global state
             auth.username = json.username;
             auth.userId = json.id;
-            //auth.authenticated = true;
             auth.setAuthenticated(true);
 
             // navigate to welcome screen
             navigate(`/user/${json.id}`);
 
         } else {
-            // handle unauthorized
+            // handle not authenticated
         }
     } catch (err) {
         console.log(`error: ${err}`);

@@ -35,25 +35,23 @@ function App() {
 
     const payload = useLoaderData();
 
-    // if (payload) {
-    //     const userinfo = payload.userinfo;
-    //     auth.userId = userinfo.id;
-    //     auth.username = userinfo.username;
-    //     //auth.authenticated = true;
-    //     auth.setAuthenticated(true);
-    //     settings.current = payload.savedSettings
-    // }
-    
-    useEffect(()=>{
+    useEffect(() => {
         if (payload) {
-        const userinfo = payload.userinfo;
-        auth.userId = userinfo.id;
-        auth.username = userinfo.username;
-        //auth.authenticated = true;
-        auth.setAuthenticated(true);
-        settings.current = payload.savedSettings
-    }
-    },[]);
+            const userinfo = payload.userinfo;
+            console.log("userinfo:");
+            console.log(userinfo);
+            // console.log("auth:");
+            // console.log(auth);
+            auth.userId = userinfo.id;
+            auth.username = userinfo.username;
+            //auth.authenticated = true;
+            auth.setAuthenticated(() => true);
+            settings.current = payload.savedSettings
+            console.log("auth:");
+            console.log(auth);
+
+        }
+    }, []);
 
 
     //const [categories, categoriesError] = useFetch(API_CATEGORIES_URL);
@@ -89,3 +87,12 @@ export { App, SettingsContext };
 //     auth.current.authenticated = true;
 //     settings.current = payload.savedSettings
 // }
+
+ // if (payload) {
+    //     const userinfo = payload.userinfo;
+    //     auth.userId = userinfo.id;
+    //     auth.username = userinfo.username;
+    //     //auth.authenticated = true;
+    //     auth.setAuthenticated(true);
+    //     settings.current = payload.savedSettings
+    // }

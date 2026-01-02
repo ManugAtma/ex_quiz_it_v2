@@ -24,10 +24,7 @@ function Layout() {
 
   const [authenticated, setAuthenticated] = useState(false);
 
-
   const auth = useRef({
-    // authenticated: authenticated,
-    // setAuthenticated: setAuthenticated,
     username: "",
     userId: "",
   });
@@ -35,14 +32,14 @@ function Layout() {
   auth.current.authenticated = authenticated
   auth.current.setAuthenticated = setAuthenticated
 
-  // const auth = useRef({
-  //   authenticated: false,
-  //   username: "",
-  //   userId: "",
-  // });
+  const [auth1, setAuth1] = useState({
+    authenticated: false,
+    username: "",
+    userId: "",
+  });
 
   return (
-    <AuthContext.Provider value={auth.current}>
+    <AuthContext.Provider value={[auth.current, auth1]}>
       <div className="min-vh-100 d-flex flex-column bg-light">
         <Header />
         <main className="container my-4 flex-grow-1">
@@ -54,4 +51,11 @@ function Layout() {
   );
 }
 
-export  {Layout, AuthContext};
+export { Layout, AuthContext };
+
+
+// const auth = useRef({
+//   authenticated: false,
+//   username: "",
+//   userId: "",
+// });

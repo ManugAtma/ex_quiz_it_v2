@@ -1,13 +1,18 @@
 
 TODO 
 
-- try making auth.authenticated reactive (change login fun and restore fun in router)
 - handle session timeout
+- handle not authenticated in login() in FE
 - check Spinner of hydrateFallbackElement of App in router
 - check unknown props in App userinfo object (useEffect)
-- verify jwt in middleware X
 - loading animation for settings until categories fetched (Welcome)
 - DB
-- Header
-- logout
 - remove testObjects and uncomment in App
+
+
+DONE
+
+- try making auth.authenticated reactive (change login fun and restore fun in router) X
+- Header X
+- logout X
+- verify jwt in middleware X

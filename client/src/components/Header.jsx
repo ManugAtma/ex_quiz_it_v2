@@ -2,13 +2,16 @@ import { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
+import logout from '@/services/logout';
 import { GITHUB_URL } from '@/config';
 
 import { AuthContext } from './Layout';
+import { Button } from 'react-bootstrap';
 
 
 /**
@@ -27,10 +30,14 @@ import { AuthContext } from './Layout';
  */
 function Header() {
 
-    const auth = useContext(AuthContext)
+    const auth = useContext(AuthContext);
+    const navigate = useNavigate();
+    console.log(`Header: ${auth.authenticated}`);
+
 
     return (
         <Navbar expand="lg" className="bg-info navbar-dark borsok-font">
+            {/* <Button onClick={()=>console.log(auth.authenticated)}> auth</Button> */}
             <Container fluid>
                 <Navbar.Brand as={NavLink} to="/">
                     <div className="bg-secondary border border-3 border-primary rounded-4 pt-2 ps-2 pe-2">
@@ -44,7 +51,12 @@ function Header() {
 
                 {/* right: Small screen only (icon + toggler) */}
                 <div className="d-flex align-items-center ms-auto m d-lg-none">
-                    {auth.authenticated ? <p>logout</p> : null}
+                    {auth.authenticated && <FontAwesomeIcon
+                        icon={faArrowRightFromBracket}
+                        size="2x"
+                        className="text-light me-1 clickable"
+                        onClick={()=> logout(auth, navigate)}
+                    />}
                     {/* gitHub icon (left of toggler) */}
                     <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="me-3">
                         <FontAwesomeIcon
@@ -64,13 +76,11 @@ function Header() {
                     <Nav className="me-auto">
 
                         {auth.authenticated
-                            ? <Nav.Link className="text-light" as={NavLink} to="/user/:id/play">Play</Nav.Link>
-                            : null
-                        }
-
-                        {auth.authenticated
-                            ? <Nav.Link className="text-light" as={NavLink} to="/user/:id/settings">Settings</Nav.Link>
-                            : null
+                            && (
+                            <>
+                                <Nav.Link className="text-light" as={NavLink} to="/user/:id/play">Play</Nav.Link>
+                                <Nav.Link className="text-light" as={NavLink} to="/user/:id/settings">Settings</Nav.Link>
+                            </>)
                         }
 
                         <Nav.Link className="text-light" as={NavLink} to="about">About</Nav.Link>
@@ -78,13 +88,18 @@ function Header() {
                     </Nav>
 
                     {/* gitHub icon for large screens only */}
-                    <div className="d-none d-lg-block ms-auto me-2">
-                        {auth.authenticated ? <p>logout</p> : null}
+                    <div className="d-flex d-lg-block ms-auto me-2">
+                        {auth.authenticated && <FontAwesomeIcon
+                            icon={faArrowRightFromBracket}
+                            size="2x"
+                            className="text-light mt-4 me-2 clickable"
+                            onClick={()=> logout(auth, navigate)}
+                        />}
                         <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
                             <FontAwesomeIcon
                                 icon={faGithub}
                                 size="2x"
-                                className="text-light mt-1"
+                                className="text-light"
                             />
                         </a>
                     </div>

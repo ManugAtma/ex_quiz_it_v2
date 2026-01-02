@@ -8,6 +8,7 @@ export default function ProtectedLayout() {
 
     const auth = useContext(AuthContext);
     const authenticated = auth.authenticated;
+    console.log(`ProtectedLayout: ${auth.authenticated}`);
 
     // handle case where jwt is still being verified, loading etc
 
