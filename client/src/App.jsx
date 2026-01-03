@@ -31,25 +31,24 @@ function App() {
     // create var to save token top level to keep it across rerenders/navigation, 
     const tokenRef = useRef({ token: "" });
 
-    const auth = useContext(AuthContext)
+    const [auth, setAuth] = useContext(AuthContext)
 
     const payload = useLoaderData();
 
     useEffect(() => {
         if (payload) {
             const userinfo = payload.userinfo;
-            console.log("userinfo:");
-            console.log(userinfo);
-            // console.log("auth:");
-            // console.log(auth);
-            auth.userId = userinfo.id;
-            auth.username = userinfo.username;
-            //auth.authenticated = true;
-            auth.setAuthenticated(() => true);
-            settings.current = payload.savedSettings
-            console.log("auth:");
-            console.log(auth);
-
+            setAuth({
+                userId: userinfo.id,
+                username: userinfo.username,
+                authenticated: true
+            });
+        } else {
+             setAuth({
+                userId: "",
+                username: "",
+                authenticated: false
+            });
         }
     }, []);
 
@@ -88,11 +87,11 @@ export { App, SettingsContext };
 //     settings.current = payload.savedSettings
 // }
 
- // if (payload) {
-    //     const userinfo = payload.userinfo;
-    //     auth.userId = userinfo.id;
-    //     auth.username = userinfo.username;
-    //     //auth.authenticated = true;
-    //     auth.setAuthenticated(true);
-    //     settings.current = payload.savedSettings
-    // }
+// if (payload) {
+//     const userinfo = payload.userinfo;
+//     auth.userId = userinfo.id;
+//     auth.username = userinfo.username;
+//     //auth.authenticated = true;
+//     auth.setAuthenticated(true);
+//     settings.current = payload.savedSettings
+// }

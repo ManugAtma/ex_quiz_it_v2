@@ -21,14 +21,13 @@ import Setting from './Setting';
 
 function Settings() {
 
-    //const categories = data?.trivia_categories;
     const [settings] = useContext(SettingsContext);
     const [amount, setAmount] = useState(settings.current.amount);
     const [category, setCategory] = useState(settings.current.category);
     const [difficulty, setDifficulty] = useState(settings.current.difficulty);
     const [, , , categories, categoriesError] = useContext(SettingsContext)
     const [showAlert, setShowAlert] = useState(false);
-    const auth = useContext(AuthContext);
+    const [auth] = useContext(AuthContext);
 
     async function saveSettings(e) {
         e.preventDefault();

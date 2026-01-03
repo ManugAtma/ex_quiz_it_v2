@@ -10,12 +10,6 @@ interface LoginPayload {
     password: string;
 }
 
-// TODO replace with DB calls in functions
-const savedSettings = {
-    amount: 5,
-    category: "",
-    difficulty: "",
-};
 
 export async function login(req: Request<{}, {}, LoginPayload>, res: Response) {
 
@@ -34,8 +28,8 @@ export async function login(req: Request<{}, {}, LoginPayload>, res: Response) {
             res.status(200);
 
             // payload
-            const payload = { username: dbUser.name, id: 1 } // TODO replace id
-
+            const payload = { username: dbUser.name, id: 1, settings: dbUser.settings } // TODO replace id
+            console.log(payload.settings);
 
             // create jwt
             const secret = process.env.JWT_SECRET!;
@@ -43,7 +37,6 @@ export async function login(req: Request<{}, {}, LoginPayload>, res: Response) {
 
             // set cookie
             res.cookie(process.env.ACCESS_TOKEN!, token, { maxAge: 180000, httpOnly: true });
-
 
             // set body and send
             res.json(payload);

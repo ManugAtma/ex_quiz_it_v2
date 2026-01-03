@@ -3,6 +3,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
 
 import { AuthContext } from "@/components/Layout";
+import { SettingsContext } from "@/App";
 
 import login from "./login";
 
@@ -13,7 +14,7 @@ export default function Login() {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
 
-    const auth = useContext(AuthContext);
+    const [auth, setAuth] = useContext(AuthContext);
     const navigate = useNavigate();
 
     if (auth.authenticated){
@@ -40,7 +41,7 @@ export default function Login() {
 
                 <Button onClick={(e) => {
                     e.preventDefault();
-                    login(auth, navigate);
+                    login(setAuth, navigate);
                 }} variant="primary" type="submit">
                     Login
                 </Button>

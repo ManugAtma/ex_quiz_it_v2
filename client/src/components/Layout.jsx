@@ -22,24 +22,14 @@ const AuthContext = createContext();
  */
 function Layout() {
 
-  const [authenticated, setAuthenticated] = useState(false);
-
-  const auth = useRef({
-    username: "",
-    userId: "",
-  });
-
-  auth.current.authenticated = authenticated
-  auth.current.setAuthenticated = setAuthenticated
-
-  const [auth1, setAuth1] = useState({
+  const [auth, setAuth] = useState({
     authenticated: false,
     username: "",
     userId: "",
   });
 
   return (
-    <AuthContext.Provider value={[auth.current, auth1]}>
+    <AuthContext.Provider value={[auth, setAuth]}>
       <div className="min-vh-100 d-flex flex-column bg-light">
         <Header />
         <main className="container my-4 flex-grow-1">
@@ -52,10 +42,3 @@ function Layout() {
 }
 
 export { Layout, AuthContext };
-
-
-// const auth = useRef({
-//   authenticated: false,
-//   username: "",
-//   userId: "",
-// });

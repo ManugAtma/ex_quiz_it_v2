@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { Button } from "react-bootstrap";
 
 import { AuthContext } from "@/components/Layout";
 import useFetch from "@/util/useFetch";
@@ -10,7 +11,7 @@ export default function Welcome() {
 
     const [settings] = useContext(SettingsContext);
 
-    const auth = useContext(AuthContext);
+    const [auth] = useContext(AuthContext);
     const userName = auth.username;
 
     // fetch and store settings so that they are available for a game
@@ -22,6 +23,8 @@ export default function Welcome() {
     }, [userSettings]);
 
     return (
-        <h2>Welcome {userName}</h2>
+        <>
+            <h2>Welcome {userName}</h2>
+        </>
     );
 }

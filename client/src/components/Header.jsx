@@ -11,7 +11,6 @@ import logout from '@/services/logout';
 import { GITHUB_URL } from '@/config';
 
 import { AuthContext } from './Layout';
-import { Button } from 'react-bootstrap';
 
 
 /**
@@ -30,16 +29,14 @@ import { Button } from 'react-bootstrap';
  */
 function Header() {
 
-    const auth = useContext(AuthContext);
+    const [auth, setAuth] = useContext(AuthContext);
     const navigate = useNavigate();
-    console.log(`Header: ${auth.authenticated}`);
-
 
     return (
         <Navbar expand="lg" className="bg-info navbar-dark borsok-font">
             {/* <Button onClick={()=>console.log(auth.authenticated)}> auth</Button> */}
             <Container fluid>
-                <Navbar.Brand as={NavLink} to="/">
+                <Navbar.Brand as={NavLink} to="/login">
                     <div className="bg-secondary border border-3 border-primary rounded-4 pt-2 ps-2 pe-2">
                         <h1 className="borsok-font fs-1 pt-2">
                             <span className="text-warning">Ex</span>
@@ -78,8 +75,8 @@ function Header() {
                         {auth.authenticated
                             && (
                             <>
-                                <Nav.Link className="text-light" as={NavLink} to="/user/:id/play">Play</Nav.Link>
-                                <Nav.Link className="text-light" as={NavLink} to="/user/:id/settings">Settings</Nav.Link>
+                                <Nav.Link className="text-light" as={NavLink} to={`/user/${auth.userId}/play`}>Play</Nav.Link>
+                                <Nav.Link className="text-light" as={NavLink} to={`/user/${auth.userId}/settings`}>Settings</Nav.Link>
                             </>)
                         }
 
@@ -93,7 +90,7 @@ function Header() {
                             icon={faArrowRightFromBracket}
                             size="2x"
                             className="text-light mt-4 me-2 clickable"
-                            onClick={()=> logout(auth, navigate)}
+                            onClick={()=> logout(setAuth, navigate)}
                         />}
                         <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
                             <FontAwesomeIcon

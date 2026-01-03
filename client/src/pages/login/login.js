@@ -1,6 +1,6 @@
 // TODO replace hard coded url
 
-export default async function login(auth, navigate) {
+export default async function login(setAuth, navigate) {
    
     try {
 
@@ -15,13 +15,15 @@ export default async function login(auth, navigate) {
 
         if (response.ok) {
             const json = await response.json();
-            console.log(`FRONTEND: received username: ${json.username} id: ${json.id}`);
-            
-            // set global state
-            auth.username = json.username;
-            auth.userId = json.id;
-            auth.setAuthenticated(true);
+            console.log(`Received username: ${json.username} id: ${json.id}`);
 
+            // set as current user
+            setAuth({
+                username: json.username,
+                userId: json.id,
+                authenticated: true
+            });
+            
             // navigate to welcome screen
             navigate(`/user/${json.id}`);
 
