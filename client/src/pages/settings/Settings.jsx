@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { Form, Container, Button } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 import { SettingsContext } from "@/App";
 import { AuthContext } from "@/components/Layout";
@@ -58,7 +59,7 @@ function Settings() {
 
     return (
         <LoadingHandler data={categories} error={categoriesError}>
-            <Container className='mt-2'>
+            <Container className='mt-2' id="settings-form">
                 <h2 className='borsok-font'>Settings</h2>
                 <Form onSubmit={saveSettings}>
 
@@ -96,6 +97,7 @@ function Settings() {
                     <Button variant="primary" type="submit">
                         Save
                     </Button>
+                    <Button as={NavLink} to={`/user/${auth.userId}/play`} className="ms-2">play</Button>
 
                     {
                         showAlert

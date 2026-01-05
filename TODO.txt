@@ -2,7 +2,7 @@
 TODO 
 
 - delete Github icon + logout for small screen when Header toggled
-- handle session timeout -> for react state
+- handle session timeout -> for react state: 401 tiggers authenticated == false
 - handle not authenticated in login() in FE
 - check Spinner of hydrateFallbackElement of App in router
 - check unknown props in App userinfo object (useEffect)

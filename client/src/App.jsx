@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useRef } from "react";
 import { Outlet, useLoaderData } from "react-router-dom";
 
+import useFetch from "@/util/useFetch";
+import {API_CATEGORIES_URL,API_TOKEN_URL } from "@/config";
+
 import { AuthContext } from "./components/Layout";
 
 // TODO remove this import
@@ -15,8 +18,7 @@ const SettingsContext = createContext();
  * Fetches available categories from the API to pass it to Settings.
  * Fetches a session token from the API to pass it to Play. 
  * 
- * @returns {JSX.Element} The React element tree containing the Settings context provider 
- * and the router with all the pages of the app surrounded by the layout.
+ * @returns {JSX.Element} The Children defined in router surrounded by a SettingsContext.Provider
  */
 
 function App() {

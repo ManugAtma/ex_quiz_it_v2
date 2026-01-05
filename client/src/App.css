@@ -78,3 +78,16 @@ body,
 #login-form {
   max-width: 400px;
 }
+
+#login-error-box {
+  min-height: 1.5rem;
+}
+
+#welcome-text-box{
+  max-width: 80ch;
+}
+
+#settings-form {
+  max-width: 43ch;
+}
+

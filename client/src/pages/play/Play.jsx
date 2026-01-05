@@ -17,8 +17,11 @@ function Play() {
   const [playing, setPlaying] = useState(false);
 
   return (
+    // <>
+    //   {playing ? <Game /> : <PreGameScreen setPlaying={setPlaying} />}
+    // </>
     <>
-      {playing ? <Game /> : <PreGameScreen setPlaying={setPlaying} />}
+      <Game />
     </>
   )
 }

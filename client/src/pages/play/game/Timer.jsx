@@ -37,8 +37,8 @@ function Timer({ timeout, delay, setClicked, clicked, remaining, setRemaining, q
         let interval = setInterval(() => {
             if (remaining > 0) {
                 setRemaining(prev => {
-                    // values < 0 for the now prop of ProgressBar are ignored
-                    // and the previously assigned value is taken.
+                    // by default, values < 0 for the now prop of ProgressBar 
+                    // are ignored and the previously assigned value is taken.
                     // to prevent that check and set it to 0
                     if (prev - delta.current < 0) return 0
                     else return prev - delta.current;

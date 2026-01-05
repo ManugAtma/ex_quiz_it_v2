@@ -1,15 +1,24 @@
 // TODO replace hard coded url
 
-export default async function login(setAuth, navigate) {
+export default async function login(setAuth, navigate, username, password, setError, setFetching) {
    
     try {
+
+        setFetching(true);
+        setError("");
+
+        // TODO remove this, for testing only
+        // const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+        // await sleep(2000)
 
         const response = await fetch("http://localhost:3000/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             
-            // TODO replace with values from form 
-            body: JSON.stringify({ username: "John", password: "doe" }),
+            // TODO remove this 
+            //body: JSON.stringify({ username: "John", password: "doe" }),
+
+            body: JSON.stringify({ username, password }),
             credentials: "include"
         });
 
@@ -28,9 +37,11 @@ export default async function login(setAuth, navigate) {
             navigate(`/user/${json.id}`);
 
         } else {
-            // handle not authenticated
+            setError("Invalid username or password. Please try again.");
         }
     } catch (err) {
         console.log(`error: ${err}`);
+    } finally {
+        setFetching(false)
     }
 }

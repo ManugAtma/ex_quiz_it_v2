@@ -28,14 +28,14 @@ import { AuthContext } from './Layout';
  * - A toggler for small screens (i.e. smaller than bootstrap's lg). 
  */
 function Header() {
-
     const [auth, setAuth] = useContext(AuthContext);
     const navigate = useNavigate();
 
     return (
         <Navbar expand="lg" className="bg-info navbar-dark borsok-font">
-            {/* <Button onClick={()=>console.log(auth.authenticated)}> auth</Button> */}
-            <Container fluid>
+            <Container fluid className="d-flex align-items-center">
+
+                {/* Brand */}
                 <Navbar.Brand as={NavLink} to="/login">
                     <div className="bg-secondary border border-3 border-primary rounded-4 pt-2 ps-2 pe-2">
                         <h1 className="borsok-font fs-1 pt-2">
@@ -46,53 +46,16 @@ function Header() {
                     </div>
                 </Navbar.Brand>
 
-                {/* right: Small screen only (icon + toggler) */}
-                <div className="d-flex align-items-center ms-auto m d-lg-none">
-                    {auth.authenticated && <FontAwesomeIcon
-                        icon={faArrowRightFromBracket}
-                        size="2x"
-                        className="text-light me-1 clickable"
-                        onClick={()=> logout(auth, navigate)}
-                    />}
-                    {/* gitHub icon (left of toggler) */}
-                    <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="me-3">
-                        <FontAwesomeIcon
-                            icon={faGithub}
-                            size="2x"
-                            className="text-light mt-1"
-                        />
-                    </a>
-                    <Navbar.Toggle
-                        aria-controls="basic-navbar-nav"
-                        className="border border-4 text-light"
-                    />
-                </div>
 
-                {/* Collapsed nav for small, inline nav for large */}
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
 
-                        {auth.authenticated
-                            && (
-                            <>
-                                <Nav.Link className="text-light" as={NavLink} to={`/user/${auth.userId}/play`}>Play</Nav.Link>
-                                <Nav.Link className="text-light" as={NavLink} to={`/user/${auth.userId}/settings`}>Settings</Nav.Link>
-                            </>)
-                        }
-
-                        <Nav.Link className="text-light" as={NavLink} to="about">About</Nav.Link>
-
-                    </Nav>
-
-                    {/* gitHub icon for large screens only */}
-                    <div className="d-flex d-lg-block ms-auto me-2">
-                        {auth.authenticated && <FontAwesomeIcon
-                            icon={faArrowRightFromBracket}
-                            size="2x"
-                            className="text-light mt-4 me-2 clickable"
-                            onClick={()=> logout(setAuth, navigate)}
-                        />}
-                        <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+                {/* Right icons – ALWAYS visible */}
+                <div className="d-flex align-items-center ms-auto order-lg-last">
+                    <div className="mt-1 me-3">
+                        <a
+                            href={GITHUB_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <FontAwesomeIcon
                                 icon={faGithub}
                                 size="2x"
@@ -100,11 +63,59 @@ function Header() {
                             />
                         </a>
                     </div>
+                    {auth.authenticated && (
+                        <FontAwesomeIcon
+                            icon={faArrowRightFromBracket}
+                            size="2x"
+                            className="text-light me-3 clickable"
+                            onClick={() => logout(setAuth, navigate)}
+                        />
+                    )}
+                    {/* Toggler (only controls nav links) */}
+                    <Navbar.Toggle
+                        aria-controls="basic-navbar-nav"
+                        className="border border-4 text-light ms-auto d-lg-none"
+                    />
+                </div>
+
+
+
+                {/* Collapsible nav links only */}
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto mt-3 mt-lg-0">
+                        {auth.authenticated && (
+                            <>
+                                <Nav.Link
+                                    className="text-light"
+                                    as={NavLink}
+                                    to={`/user/${auth.userId}/play`}
+                                >
+                                    Play
+                                </Nav.Link>
+                                <Nav.Link
+                                    className="text-light"
+                                    as={NavLink}
+                                    to={`/user/${auth.userId}/settings`}
+                                >
+                                    Settings
+                                </Nav.Link>
+                            </>
+                        )}
+                        <Nav.Link
+                            className="text-light"
+                            as={NavLink}
+                            to="about"
+                        >
+                            About
+                        </Nav.Link>
+                    </Nav>
                 </Navbar.Collapse>
+
             </Container>
         </Navbar>
     );
 }
+
 
 
 export default Header;
