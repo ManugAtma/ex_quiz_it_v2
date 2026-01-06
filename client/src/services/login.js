@@ -1,4 +1,3 @@
-// TODO replace hard coded url
 
 export default async function login(setAuth, navigate, username, password, setError, setFetching) {
    
@@ -11,7 +10,9 @@ export default async function login(setAuth, navigate, username, password, setEr
         // const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
         // await sleep(2000)
 
-        const response = await fetch("http://localhost:3000/login", {
+        const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
+        const response = await fetch(`${BACKEND_BASE_URL}/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             

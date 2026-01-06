@@ -67,7 +67,10 @@ export const router = createBrowserRouter([
 
 
 async function restore() {
-    const res = await fetch("http://localhost:3000/me", { credentials: "include" });
+
+    const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
+    const res = await fetch(`${BACKEND_BASE_URL}/me`, { credentials: "include" });
 
     if (!res.ok) {
         console.log("session could not be restored");

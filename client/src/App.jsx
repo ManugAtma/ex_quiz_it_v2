@@ -55,15 +55,15 @@ function App() {
     }, []);
 
 
-    const [categories, categoriesError] = useFetch(API_CATEGORIES_URL);
+    //const [categories, categoriesError] = useFetch(API_CATEGORIES_URL);
     
     // for testing only
-    //const categoriesError = null;
+    const categoriesError = null;
 
-    const [token, tokenError] = useFetch(API_TOKEN_URL);
+    //const [token, tokenError] = useFetch(API_TOKEN_URL);
 
     // for testing only
-    //const tokenError = null;
+    const tokenError = null;
 
     return (
         <SettingsContext.Provider value={[settings, token, tokenError, categories, categoriesError]}>
@@ -73,31 +73,3 @@ function App() {
 }
 
 export { App, SettingsContext };
-
-
-
-
-
-// const auth = useRef({
-//     authenticated: false,
-//     username: "",
-//     userId: "",
-// });
-
-// const payload = useLoaderData();
-// if (payload) {
-//     const userinfo = payload.userinfo;
-//     auth.current.userId = userinfo.id;
-//     auth.current.username = userinfo.username;
-//     auth.current.authenticated = true;
-//     settings.current = payload.savedSettings
-// }
-
-// if (payload) {
-//     const userinfo = payload.userinfo;
-//     auth.userId = userinfo.id;
-//     auth.username = userinfo.username;
-//     //auth.authenticated = true;
-//     auth.setAuthenticated(true);
-//     settings.current = payload.savedSettings
-// }

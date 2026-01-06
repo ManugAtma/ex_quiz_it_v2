@@ -8,27 +8,37 @@ import LoadingHandler from '@/components/LoadingHandler';
 
 import Categories from './Categories';
 import SavedAlert from './SavedAlert';
+import ServerError from './ServerError';
 import Setting from './Setting';
+
+// duration for which alerts are shown to user in ms
+const DELAY = 2000;
 
 
 /**
  * @component
  * Top level component of the settings page of the website.
  * 
- * @param {Object} data a promise object that may resolves to an object containing data fetched from the api
- * @param {Object} error a promise object that may resolves to an object containing the error returned by the server
- * @returns {JSX.Element} A form for the user to change the game settings: amount of questions, category, difficulty. Or a loading animation if data is not fetched yet.
+ * @returns {JSX.Element} A form for the user to change the game settings: 
+ * amount of questions, category, difficulty. Or a loading animation 
+ * if data is not fetched yet.
  */
 
 function Settings() {
 
     const [settings] = useContext(SettingsContext);
+    const [, , , categories, categoriesError] = useContext(SettingsContext)
+    const [auth, setAuth] = useContext(AuthContext);
+
+    const [showServerError, setShowServerError] = useState(false);
+    const [showSavedAlert, setShowSavedAlert] = useState(false);
+
+    // for form
     const [amount, setAmount] = useState(settings.current.amount);
     const [category, setCategory] = useState(settings.current.category);
     const [difficulty, setDifficulty] = useState(settings.current.difficulty);
-    const [, , , categories, categoriesError] = useContext(SettingsContext)
-    const [showAlert, setShowAlert] = useState(false);
-    const [auth] = useContext(AuthContext);
+
+
 
     async function saveSettings(e) {
         e.preventDefault();
@@ -40,8 +50,10 @@ function Settings() {
             difficulty
         };
 
+        const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
         // save in DB
-        const res = await fetch(`http://localhost:3000/user/${auth.userId}/settings`, {
+        const res = await fetch(`${BACKEND_BASE_URL}/user/${auth.userId}/settings`, {
             method: "PUT",
             credentials: "include",
             headers: {
@@ -51,9 +63,17 @@ function Settings() {
         });
 
         if (res.ok) {
-            setShowAlert(true);
+            setShowSavedAlert(true);
         } else {
-            // TODO 
+            if (res.status == 401) {
+                setAuth({
+                    userId: "",
+                    username: "",
+                    authenticated: false
+                });
+            } else {
+                setShowServerError(true);
+            }
         }
     }
 
@@ -100,8 +120,13 @@ function Settings() {
                     <Button as={NavLink} to={`/user/${auth.userId}/play`} className="ms-2">play</Button>
 
                     {
-                        showAlert
-                            ? <SavedAlert setShowAlert={setShowAlert} delay={2000} />
+                        showSavedAlert
+                            ? <SavedAlert setShowAlert={setShowSavedAlert} delay={DELAY} />
+                            : ""
+                    }
+                    {
+                        showServerError
+                            ? <ServerError setShowAlert={setShowServerError} delay={DELAY} />
                             : ""
                     }
                 </Form>

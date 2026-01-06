@@ -1,7 +1,3 @@
-import { useState } from 'react';
-
-import PreGameScreen from '@/pages/play/pre-game/PreGameScreen';
-
 import { Game } from './game/Game';
 
 
@@ -14,12 +10,7 @@ import { Game } from './game/Game';
 
 function Play() {
 
-  const [playing, setPlaying] = useState(false);
-
   return (
-    // <>
-    //   {playing ? <Game /> : <PreGameScreen setPlaying={setPlaying} />}
-    // </>
     <>
       <Game />
     </>

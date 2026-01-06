@@ -18,8 +18,9 @@ export default function Welcome() {
     const [auth] = useContext(AuthContext);
     const userName = auth.username;
 
-    // fetch and store settings so that they are available for a game
-    const [userSettings, error,] = useFetch(`http://localhost:3000/user/${auth.userId}/settings`, [], { credentials: "include" });
+    // fetch and store settings to make them available for a game
+    const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+    const [userSettings, error,] = useFetch(`${BACKEND_BASE_URL}/user/${auth.userId}/settings`, [], { credentials: "include" });
     useEffect(() => {
         if (userSettings) {
             settings.current = userSettings;
