@@ -11,5 +11,5 @@ export const API_CATEGORIES_URL = "https://opentdb.com/api_category.php";
 export const API_TOKEN_URL = "https://opentdb.com/api_token.php?command=request";
 
 // the project on the author's Github account 
-export const GITHUB_URL = "https://github.com/ManugAtma/ex_quiz_it";
+export const GITHUB_URL = "https://github.com/ManugAtma/ex_quiz_it_v2.git";
 
