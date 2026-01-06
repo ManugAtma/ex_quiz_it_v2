@@ -55,11 +55,15 @@ function App() {
     }, []);
 
 
-    //const [categories, categoriesError] = useFetch(API_CATEGORIES_URL);
-    const categoriesError = null;
+    const [categories, categoriesError] = useFetch(API_CATEGORIES_URL);
+    
+    // for testing only
+    //const categoriesError = null;
 
-    //const [token, tokenError] = useFetch(API_TOKEN_URL);
-    const tokenError = null;
+    const [token, tokenError] = useFetch(API_TOKEN_URL);
+
+    // for testing only
+    //const tokenError = null;
 
     return (
         <SettingsContext.Provider value={[settings, token, tokenError, categories, categoriesError]}>

@@ -36,6 +36,9 @@ export default function Login() {
             <div className="mb-4">
                 <h2>Login</h2>
             </div>
+
+            <div className="mt-3 mb-4 text-success"><p>Try username: John, password: doe</p></div>
+            
             
             <Form className="mt-2">
 
