@@ -7,12 +7,28 @@ import mongoose from 'mongoose';
 import authRouter from './routes/auth.routes';
 import userRouter from './routes/user.routes';
 
+const allowedOrigins = [
+    "http://localhost:5173",       // local dev
+    process.env.FRONTEND_URL       // deployed frontend
+];
+
 // create server
 const app = express();
 
 app.use(express.json());
+// app.use(cors({
+//     origin: "http://localhost:5173",
+//     credentials: true
+// }));
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true); // allow Postman/server-to-server
+        if (allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     credentials: true
 }));
 app.use(cookieParser());

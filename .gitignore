@@ -37,8 +37,8 @@ node_modules/
 client/dist/
 
 # Node / TypeScript
-server/dist/
-server/build/
+api/dist/
+api/build/
 
 # =========================
 # TypeScript

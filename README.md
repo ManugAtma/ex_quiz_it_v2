@@ -57,7 +57,7 @@ Trivia questions are fetched from the [Open Trivia DB API](https://opentdb.com/a
 
 3. Backend setup
 
-    `cd client` <br>
+    `cd server` <br>
     `npm install` <br>
     `npx tsx src/server.ts` <br>
 
@@ -78,8 +78,8 @@ Trivia questions are fetched from the [Open Trivia DB API](https://opentdb.com/a
 ## Usage
 
 - Log in using the provided demo credentials
-- Start a new quiz
 - Adjust quiz settings (category, difficulty, number of questions)
+- Start a new quiz
 - Answer timed questions
 - View your score and statistics at the end
 - Log out securely
