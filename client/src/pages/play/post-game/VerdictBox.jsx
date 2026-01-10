@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Card, Button, Container } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
+import { AuthContext } from "@/components/Layout";
 import { StatsContext } from "@/pages/play/game/Game";
 import calcVerdict from "@/pages/play/util/calcVerdict";
 
@@ -22,6 +23,7 @@ import Verdict from "./Verdict";
 function VerdictBox({ dispatch, setStats }) {
 
     const [stats] = useContext(StatsContext);
+    const [auth] = useContext(AuthContext);
 
     function startNewGame() {
         dispatch({ type: "NEW_GAME" });
@@ -42,7 +44,7 @@ function VerdictBox({ dispatch, setStats }) {
                         color={color} 
                     />
                     <Button className="me-2" onClick={startNewGame}>new game</Button>
-                    <Button as={NavLink} to="/settings">settings</Button>
+                    <Button as={NavLink} to={`/user/${auth.userId}/settings`}>settings</Button>
                 </Card.Body>
             </Card>
         </Container>

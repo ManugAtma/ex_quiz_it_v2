@@ -1,13 +1,13 @@
 
 TODO 
 
-- delete Github icon + logout for small screen when Header toggled
+- fix /settings route in PostgameScreen
+- error when directly loading play route, make stats reactive?
 - handle session timeout -> for react state: 401 tiggers authenticated == false
 - handle not authenticated in login() in FE
 - check Spinner of hydrateFallbackElement of App in router
 - check unknown props in App userinfo object (useEffect)
 - loading animation for settings until categories fetched (Welcome)
-- DB
 - remove testObjects and uncomment in App
 
 
@@ -18,4 +18,8 @@ DONE
 - logout X
 - verify jwt in middleware X
 - fetch settings and set with login X
+- delete Github icon + logout for small screen when Header toggled
+- DB
+
+
 

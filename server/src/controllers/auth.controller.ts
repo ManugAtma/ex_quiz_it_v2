@@ -36,7 +36,14 @@ export async function login(req: Request<{}, {}, LoginPayload>, res: Response) {
             const token = jwt.sign(payload, secret, { expiresIn: "3m" });
 
             // set cookie
-            res.cookie(process.env.ACCESS_TOKEN!, token, { maxAge: 180000, httpOnly: true });
+            res.cookie(process.env.ACCESS_TOKEN!, token, {
+                maxAge: 180000,
+                httpOnly: true,
+                secure: true,     
+                sameSite: 'none',  
+                partitioned: true,
+                path: "/"
+            });
 
             // set body and send
             res.json(payload);
@@ -57,11 +64,11 @@ export async function getMe(req: Request<{}, {}, LoginPayload>, res: Response) {
         const userinfo = req.user!;
         console.log(`getMe: ${userinfo.id}`)
 
-        const query = { name: userinfo.username};
+        const query = { name: userinfo.username };
         const user = await User.findOne();
         const settings = user!.settings;
         const payload = { userinfo, settings };
-        
+
         //const payload = { userinfo, savedSettings };
 
         res.status(200);
